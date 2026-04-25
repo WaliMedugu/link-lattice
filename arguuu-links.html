@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arguuu — Where Arguments Live</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #faf6f0;
+    --warm-white: #fdf9f4;
+    --sand: #e8ddd0;
+    --tan: #c9b99e;
+    --terracotta: #c4724a;
+    --rust: #a85535;
+    --brown: #5c3d2e;
+    --dark: #2a1f17;
+    --text: #3d2b1f;
+    --text-light: #7a5c4a;
+    --ink: #1a110a;
+  }
+
+  html { background: var(--cream); }
+
+  body {
+    font-family: 'Lora', serif;
+    color: var(--text);
+    background: url('assets/bg.png') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 52px 20px 72px;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(250, 246, 240, 0.35); /* Increased overlay for better contrast */
+    z-index: -1;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── AVATAR ── */
+  .profile-card {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 40px rgba(92,61,46,0.1);
+    animation: fadeUp 0.45s ease both;
+  }
+
+  .profile-logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    margin-bottom: 16px;
+  }
+
+  /* ── HEADING ── */
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; /* Slightly larger */
+    font-weight: 800; /* Bolder */
+    color: var(--ink); /* Darker */
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+    text-align: center;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.1);
+    animation: fadeUp 0.45s 0.1s ease both;
+  }
+
+  .brand-tagline {
+    font-family: 'Lora', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--text); /* Darker than text-light */
+    line-height: 1.6;
+    text-align: center;
+    max-width: 320px;
+    margin-bottom: 8px;
+    text-shadow: 0 1px 8px rgba(255,255,255,0.9);
+    animation: fadeUp 0.45s 0.15s ease both;
+  }
+
+  .brand-url {
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--rust);
+    text-decoration: none;
+    text-transform: uppercase;
+    text-shadow: 0 1px 5px rgba(255,255,255,0.5);
+    animation: fadeUp 0.45s 0.2s ease both;
+    display: inline-block;
+  }
+
+  .brand-url:hover { text-decoration: underline; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 48px;
+    height: 2px;
+    background: var(--terracotta);
+    border-radius: 2px;
+    opacity: 0.4;
+    margin-bottom: 32px;
+    animation: fadeUp 0.45s 0.22s ease both;
+  }
+
+  /* ── LINKS ── */
+  .links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 40px;
+  }
+
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.65); /* More opaque for better readability */
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--ink); /* Darkest possible text */
+    box-shadow: 0 8px 32px rgba(92,61,46,0.12);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeUp 0.45s ease both;
+  }
+
+  .link-card:hover {
+    transform: translateY(-3px) scale(1.01);
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 12px 40px rgba(168,85,53,0.15);
+  }
+
+  .link-card:active { transform: scale(0.98); box-shadow: none; }
+
+  /* featured card */
+  .link-card.featured {
+    background: linear-gradient(135deg, rgba(196, 114, 74, 0.4) 0%, rgba(168, 85, 53, 0.5) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 40px rgba(168,85,53,0.25);
+  }
+
+  .link-card.featured:hover {
+    transform: translateY(-3px) scale(1.01);
+    background: linear-gradient(135deg, rgba(196, 114, 74, 0.5) 0%, rgba(168, 85, 53, 0.6) 100%);
+    box-shadow: 0 15px 50px rgba(168,85,53,0.35);
+  }
+
+  .link-card.featured .link-title { color: #fff; font-weight: 700; font-size: 15px; }
+  .link-card.featured .link-sub   { color: rgba(255,255,255,0.7); }
+  .link-card.featured .link-arrow { color: rgba(255,255,255,0.6); }
+
+  .link-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px;
+  }
+
+  .link-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .link-card.featured .link-icon {
+    background: rgba(255,255,255,0.9);
+  }
+
+  .link-text { flex: 1; min-width: 0; }
+
+  .link-title {
+    font-family: 'Lora', serif;
+    font-size: 15.5px;
+    font-weight: 700; /* Bolder */
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+
+  .link-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text); /* Darker than text-light */
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .link-arrow {
+    color: var(--tan);
+    font-size: 16px;
+    flex-shrink: 0;
+    transition: transform 0.18s;
+  }
+
+  .link-card:hover .link-arrow { transform: translateX(3px); }
+
+  /* stagger */
+  .link-card:nth-child(1) { animation-delay: 0.18s; }
+  .link-card:nth-child(2) { animation-delay: 0.25s; }
+  .link-card:nth-child(3) { animation-delay: 0.32s; }
+  .link-card:nth-child(4) { animation-delay: 0.39s; }
+  .link-card:nth-child(5) { animation-delay: 0.46s; }
+
+  /* ── FOOTER ── */
+  .footer {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.8;
+    text-align: center;
+    text-shadow: 0 1px 4px rgba(255,255,255,0.4);
+    animation: fadeUp 0.45s 0.55s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="profile-card">
+    <img src="assets/arguuu_logo.png" alt="Arguuu Logo" class="profile-logo">
+
+    <h1 class="brand-name">Arguuu</h1>
+    <p class="brand-tagline">Structured debate. Real-time competition.<br>Win through wit, facts, and argument.</p>
+    <a href="https://arguuu-web.vercel.app/" target="_blank" class="brand-url">arguuu-web.vercel.app</a>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="links">
+
+    <a href="https://arguuu-web.vercel.app/" target="_blank" class="link-card featured">
+      <div class="link-icon">
+        <img src="assets/arguuu_logo.png" alt="Arguuu">
+      </div>
+      <div class="link-text">
+        <div class="link-title">Arguuu — Official Site</div>
+        <div class="link-sub">arguuu-web.vercel.app</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a href="http://arguuu-hub.vercel.app/" target="_blank" class="link-card">
+      <div class="link-icon">
+        <img src="assets/arguuu_logo.png" alt="Arguuu Hub">
+      </div>
+      <div class="link-text">
+        <div class="link-title">Arguuu Hub</div>
+        <div class="link-sub">Explore the debate universe</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a href="https://www.instagram.com/arguuuapp" target="_blank" class="link-card">
+      <div class="link-icon">
+        <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram">
+      </div>
+      <div class="link-text">
+        <div class="link-title">Instagram</div>
+        <div class="link-sub">@arguuuapp</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a href="https://www.tiktok.com/@arguuu.app" target="_blank" class="link-card">
+      <div class="link-icon">
+        <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok">
+      </div>
+      <div class="link-text">
+        <div class="link-title">TikTok</div>
+        <div class="link-sub">@arguuu.app</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a href="https://x.com/ArguuuApp" target="_blank" class="link-card">
+      <div class="link-icon">
+        <img src="https://cdn.simpleicons.org/x/000000" alt="X">
+      </div>
+      <div class="link-text">
+        <div class="link-title">X (Twitter)</div>
+        <div class="link-sub">@ArguuuApp</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+  </div>
+
+  <p class="footer">© 2025 Arguuu · Blue Particle Studios</p>
+
+</div>
+</body>
+</html>
