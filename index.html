@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Link Lattice — Multi-Link Hub</title>
+<link rel="icon" type="image/png" href="assets/linklatice.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -113,11 +114,27 @@
     opacity: 0.7;
     margin-top: 20px;
   }
+
+  .hub-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08));
+    animation: fadeInDown 0.6s ease-out;
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 </style>
 </head>
 <body>
 <div class="container">
   <div class="hub-card">
+    <img src="assets/linklatice.png" alt="Link Lattice Logo" class="hub-logo">
     <h1>Link Lattice</h1>
     <p class="tagline">Explore our curated link portfolios.</p>
     
