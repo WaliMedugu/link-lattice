@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Link Lattice — Multi-Link Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #faf6f0;
+    --dark: #1a110a;
+    --text: #3d2b1f;
+    --rust: #a85535;
+  }
+
+  body {
+    font-family: 'Lora', serif;
+    color: var(--text);
+    background: url('assets/bg.png') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 20px;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(250, 246, 240, 0.4);
+    z-index: -1;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .hub-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    padding: 48px 32px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+
+  p.tagline {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 32px;
+  }
+
+  .directory {
+    display: grid;
+    gap: 16px;
+  }
+
+  .project-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 600;
+    transition: all 0.25s ease;
+  }
+
+  .project-link:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 24px rgba(168,85,53,0.15);
+  }
+
+  .project-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .project-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--rust);
+    border-radius: 50%;
+  }
+
+  .footer {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hub-card">
+    <h1>Link Lattice</h1>
+    <p class="tagline">Explore our curated link portfolios.</p>
+    
+    <div class="directory">
+      <a href="arguuu/" class="project-link">
+        <div class="project-info">
+          <div class="project-dot"></div>
+          <span>Arguuu Links</span>
+        </div>
+        <span>→</span>
+      </a>
+      <!-- Add more project links here in the future -->
+    </div>
+  </div>
+  
+  <p class="footer">© 2025 Link Lattice · Blue Particle Studios</p>
+</div>
+</body>
+</html>
